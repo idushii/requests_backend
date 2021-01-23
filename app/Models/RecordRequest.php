@@ -15,9 +15,9 @@ class RecordRequest extends Model
 
     protected $fillable = [
         'session_id',
+        'bloc_action_id',
         'status',
         'status_code',
-        'bloc_action_id',
         'method',
         'duration',
         'params',

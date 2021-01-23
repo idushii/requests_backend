@@ -12,11 +12,16 @@ class UserFavoriteDevice extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'user_id',
         'device_id',
         'created_at'
     ];
 
     public function Device() {
         return $this->belongsTo('App\Models\DeviceRecord', 'device_id', 'id');
+    }
+
+    public function User() {
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 }

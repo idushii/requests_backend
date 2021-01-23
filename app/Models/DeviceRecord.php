@@ -23,4 +23,8 @@ class DeviceRecord extends Model
     public function FavoriteDevice() {
         return $this->belongsTo('App\Models\UserFavoriteDevice', 'device_id', 'id');
     }
+
+    public function Sessions() {
+        return $this->hasMany('App\Models\SessionRecord', 'device_id', 'id');
+    }
 }
