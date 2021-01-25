@@ -4,6 +4,7 @@ set -e
 echo "Deploying application ..."
 
 (
+    ../start.sh 2 &&
     git fetch origin deploy &&
         git reset --hard origin/deploy &&
         composer install --no-interaction --prefer-dist --optimize-autoloader &&
@@ -17,7 +18,7 @@ echo "Deploying application ..."
 
 errorCode=$?
 if [ $errorCode -ne 0 ]; then
-    echo "We have an error"
+    echo "We have an error" && ../error.sh 2
 
     exit $errorCode
 fi
