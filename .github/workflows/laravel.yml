@@ -19,8 +19,8 @@ jobs:
       with:
         php-version: '7.4'
     - uses: actions/checkout@v2
-    - name: current path
-      run: echo $PWD
+#    - name: current path
+#      run: echo $PWD
     - name: git pull
       run: git pull
     - name: Copy .env
