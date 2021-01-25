@@ -16,8 +16,6 @@ jobs:
       with:
         php-version: '7.4'
     - uses: actions/checkout@v2
-    - name: go folder
-      run: cd /var/www/requests_backend
     - name: git pull
       run: git pull
     - name: Copy .env
