@@ -68,6 +68,6 @@ class UserController extends Controller
         $user = User::where('token', $token)->get();
         $user->last_request_id = RecordRequest::pluck('id')->last();
         $user->save();
-        return $user->load('FavoriteDevices');
+        return $user;
     }
 }

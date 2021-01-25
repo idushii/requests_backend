@@ -61,17 +61,4 @@ class RecordRequestController extends Controller
 
         return response()->json(RecordRequest::create($input), 201);
     }
-
-     /**
-     * Operation getAllRevices
-     *
-     * @return Http response
-     */
-
-    public function getAllRevices(Request $request)
-    {
-        $input = $request->input();
-
-        return response()->json(RecordRequest::create($input), 201);
-    }
 }
