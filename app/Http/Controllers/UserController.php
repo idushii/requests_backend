@@ -3,83 +3,71 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\RecordRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * getMe
+     *
+     * @param token
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getMe($token)
     {
-        //
+        $user = User::where('token', $token)->get();
+
+        return $user->load('FavoriteDevices');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Login
+     *
+     * @param login,password
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function login($login, $password)
     {
-        //
+        $user = User::where('login', $login)->first();
+        if ($user &&  password_verify($password, $user->password)) {
+            $user->token == uniqid();
+            $user->last_request_id = RecordRequest::pluck('id')->last();
+            $user->save();
+            return $user;
+        } else {
+            return false;
+        }
     }
 
     /**
-     * Store a newly created resource in storage.
+     * logout
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  token
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function logout($token)
     {
-        //
+        $user = User::where('token', $token);
+        $user->token = '';
+        $user->save();
+        return response()->json('', 200);
     }
 
     /**
-     * Display the specified resource.
+     * lastRequest
      *
-     * @param  \App\Models\User  $user
+     * @param token
+     *
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function lastRequest($token)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
+        $user = User::where('token', $token)->get();
+        $user->last_request_id = RecordRequest::pluck('id')->last();
+        $user->save();
+        return $user->load('FavoriteDevices');
     }
 }
