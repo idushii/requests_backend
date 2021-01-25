@@ -19,4 +19,4 @@ jobs:
         host: ovz1.j1121565.m2oon.vps.myjino.ru
         password: ${{ secrets.SSH_PASSWORD }}
         port: 49346
-        script: 'cd /var/www/requests_backend && ./server_deploy.sh'
+        script: 'echo $USER && cd /var/www/requests_backend && ./server_deploy.sh'
