@@ -3,83 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserFavoriteDevice;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserFavoriteDeviceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
+     /**
+     * addFavoriteDevice
      *
-     * @return \Illuminate\Http\Response
+     * @param int $id  (required)
+     *
+     * @return Http response
      */
-    public function index()
+    public function addFavoriteDevice(Request $request, $id)
     {
-        //
+        $input = $request->input();
+
+        User::find($id)->update($input);
+
+        return response()->json(UserFavoriteDevice::create($input), 201);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * removeFavoriteDevice
      *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * @param int $id  (required)
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Http response
      */
-    public function store(Request $request)
+    public function removeFavoriteDevice($id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\UserFavoriteDevice  $userFavoriteDevice
-     * @return \Illuminate\Http\Response
-     */
-    public function show(UserFavoriteDevice $userFavoriteDevice)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\UserFavoriteDevice  $userFavoriteDevice
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UserFavoriteDevice $userFavoriteDevice)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserFavoriteDevice  $userFavoriteDevice
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, UserFavoriteDevice $userFavoriteDevice)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\UserFavoriteDevice  $userFavoriteDevice
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(UserFavoriteDevice $userFavoriteDevice)
-    {
-        //
+        UserFavoriteDevice::find($id)->delete();
+        return response()->json('', 200);
     }
 }
