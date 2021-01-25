@@ -15,10 +15,10 @@ class CreateRecordRequestsTable extends Migration
     {
         Schema::create('record_requests', function (Blueprint $table) {
             $table->id();
-            $table->integer('session_id')->unsigned();
+            $table->unsignedBigInteger('session_id');
             $table->enum('status', array('pending', 'error', 'done'))->default('pending');
             $table->integer('status_code');
-            $table->integer('bloc_action_id')->nullable();
+            $table->unsignedBigInteger('bloc_action_id');
             $table->enum('method', array('POST', 'GET', 'DELETE', 'PUT'))->default('POST');
             $table->integer('duration');
             $table->string('params'); // json
@@ -28,8 +28,6 @@ class CreateRecordRequestsTable extends Migration
             $table->string('url');
             $table->string('headers_response'); // json
             $table->string('headers'); // json
-            $table->foreign('session_id')->references('id')->on('session_records')->onDelete('cascade');
-            $table->foreign('bloc_action_id')->references('id')->on('bloc_actions')->onDelete('cascade');
         });
     }
 

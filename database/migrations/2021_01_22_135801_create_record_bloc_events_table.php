@@ -15,13 +15,11 @@ class CreateRecordBlocEventsTable extends Migration
     {
         Schema::create('record_bloc_events', function (Blueprint $table) {
             $table->id();
-            $table->integer('bloc_id')->unsigned();
-            $table->integer('bloc_action_id')->unsigned();
+            $table->unsignedBigInteger('bloc_id');
+            $table->unsignedBigInteger('bloc_action_id');
             $table->string('event_name');
             $table->string('payload');  // json
             $table->timestamps();
-            $table->foreign('bloc_id')->references('id')->on('record_blocs')->onUpdate('cascade');
-            $table->foreign('bloc_action_id')->references('id')->on('record_bloc_actions')->onUpdate('cascade');
         });
     }
 

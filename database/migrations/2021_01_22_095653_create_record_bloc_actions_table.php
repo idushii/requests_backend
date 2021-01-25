@@ -15,10 +15,9 @@ class CreateRecordBlocActionsTable extends Migration
     {
         Schema::create('record_bloc_actions', function (Blueprint $table) {
             $table->id();
-            $table->integer('bloc_id')->unsigned();
+            $table->unsignedBigInteger('bloc_id');
             $table->string('name');
             $table->string('payload'); // json
-            $table->foreign('bloc_id')->references('id')->on('record_blocs')->onDelete('cascade');
         });
     }
 

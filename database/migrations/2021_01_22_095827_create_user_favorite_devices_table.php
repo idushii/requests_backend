@@ -15,11 +15,9 @@ class CreateUserFavoriteDevicesTable extends Migration
     {
         Schema::create('user_favorite_devices', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
-            $table->integer('device_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('device_id');
             $table->date('created_at');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('device_id')->references('id')->on('device_records')->onUpdate('cascade');
         });
     }
 

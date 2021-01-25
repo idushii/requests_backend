@@ -15,9 +15,8 @@ class CreateSessionRecordsTable extends Migration
     {
         Schema::create('session_records', function (Blueprint $table) {
             $table->id();
-            $table->integer('device_id')->unsigned();
+            $table->unsignedBigInteger('device_id');
             $table->timestamps();
-            $table->foreign('device_id')->references('id')->on('device_records')->onUpdate('cascade');
         });
     }
 
