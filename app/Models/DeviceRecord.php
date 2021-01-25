@@ -20,6 +20,9 @@ class DeviceRecord extends Model
         'product',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function FavoriteDevice() {
         return $this->belongsTo('App\Models\UserFavoriteDevice', 'device_id', 'id');
     }
