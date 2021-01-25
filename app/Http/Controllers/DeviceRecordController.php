@@ -16,6 +16,23 @@ class DeviceRecordController extends Controller
      */
     public function getDevice($id)
     {
-        return DeviceRecord::find($id)->get();
+        $device = DeviceRecord::find($id)->get();
+        $device->datetime_last_active = now();
+        $device->active_session_id = $device->Requests->session_id;
+        $device->save();
+        return $device;
+    }
+
+     /**
+     * Operation getAllRevices
+     *
+     * @param id
+     *
+     * @return Http response
+     */
+
+    public function getAllRevices($id)
+    {
+        return DeviceRecord::find($id)->load('Requests');
     }
 }

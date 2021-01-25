@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \Froiden\SqlGenerator\SqlGeneratorServiceProvider::class,
+        Tremby\LaravelGitVersion\GitVersionServiceProvider::class,
 
     ],
 

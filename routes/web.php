@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/commits', function () {
+    $logs = shell_exec("git log -3 ");
+
+    return view('commits', array('logs' => $logs));
+});
