@@ -26,3 +26,12 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
 #    - name: Migrate
 #      run: php artisan migrate
+
+    - name: Deploy to production
+      uses: appleboy/ssh-action@master
+      with:
+        username: root
+        host: ovz1.j1121565.m2oon.vps.myjino.ru
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: 49346
+        script: 'cd /var/www/requests_backend && ./server_deploy.sh'
