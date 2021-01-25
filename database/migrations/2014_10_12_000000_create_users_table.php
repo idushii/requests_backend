@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->string('token')->nullable();
             $table->string('password');
             $table->timestamps();
-            $table->foreign('last_request_id')->references('id')->on('record_requests')->onUpdate('cascade');
         });
     }
 

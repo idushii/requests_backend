@@ -26,7 +26,7 @@ class User extends Authenticatable
         'last_request_id'
     ];
 
-    public function LastRecordRequest() {
-        return $this->hasOne('App\Models\RecordRequest', 'last_request_id', 'id');
+    public function FavoriteDevices() {
+        return $this->hasMany('App\Models\UserFavoriteDevice', 'user_id', 'id');
     }
 }
