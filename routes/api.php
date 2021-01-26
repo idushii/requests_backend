@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/device', [\App\Http\Controllers\DeviceRecordController::class, 'index']);
 Route::post('/log', [\App\Http\Controllers\RecordRequestController::class, 'index']);
+Route::get('/log', [\App\Http\Controllers\RecordRequestController::class, 'getAll']);

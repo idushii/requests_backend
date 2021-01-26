@@ -54,6 +54,12 @@ class RecordRequestController extends Controller
      * @return Http response
      */
 
+    public function getAll()
+    {
+        $recordrequests = RecordRequest::get();
+        return $recordrequests;
+    }
+
     public function getLastRequests($idRequest)
     {
         $recordrequests = RecordRequest::where('id', '>', $idRequest)->get();
