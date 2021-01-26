@@ -8,7 +8,7 @@ echo "Deploying application ..."
     git fetch origin deploy &&
         git reset --hard origin/deploy &&
         composer install --no-interaction --prefer-dist --optimize-autoloader &&
-        php artisan migrate --force &&
+        php artisan migrate:fresh &&
         php artisan optimize &&
         php artisan up &&
         sudo service apache2 restart &&
