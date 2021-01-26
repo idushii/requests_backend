@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-
     return $request->user();
 });
+
+Route::post('/device', [\App\Http\Controllers\DeviceRecordController::class, 'index']);
+Route::post('/log', [\App\Http\Controllers\RecordRequestController::class, 'index']);

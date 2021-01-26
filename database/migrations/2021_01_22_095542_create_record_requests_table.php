@@ -15,19 +15,20 @@ class CreateRecordRequestsTable extends Migration
     {
         Schema::create('record_requests', function (Blueprint $table) {
             $table->id();
+            $table->integer('number');
             $table->unsignedBigInteger('session_id');
-            $table->enum('status', array('pending', 'error', 'done'))->default('pending');
-            $table->integer('status_code');
-            $table->unsignedBigInteger('bloc_action_id');
-            $table->enum('method', array('POST', 'GET', 'DELETE', 'PUT'))->default('POST');
-            $table->integer('duration');
-            $table->string('params'); // json
-            $table->string('payload'); // json
+            $table->string('status');
+            $table->integer('status_code')->nullable();
+            $table->unsignedBigInteger('bloc_action_id')->nullable();
+            $table->string('method')->nullable();
+            $table->integer('duration')->nullable();
+            $table->json('params')->nullable();
+            $table->json('payload')->nullable();
             $table->date('created_at');
-            $table->date('response_at');
+            $table->date('response_at')->nullable();
             $table->string('url');
-            $table->string('headers_response'); // json
-            $table->string('headers'); // json
+            $table->json('headers_response')->nullable();
+            $table->json('headers')->nullable();
         });
     }
 

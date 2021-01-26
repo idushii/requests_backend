@@ -17,7 +17,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "tremby/laravel-git-version": "^1.2"
+        "tremby/laravel-git-version": "^1.2",
+      "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

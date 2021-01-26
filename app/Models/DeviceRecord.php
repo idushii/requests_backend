@@ -5,6 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class DeviceRecord
+ * @property int id
+ * @property string uuid
+ * @property string identifier
+ * @property \DateTime datetime_last_active
+ * @property integer active_session_id
+ * @property string device_name
+ * @property string device_version
+ * @property string product
+ * @package App\Models
+ */
 class DeviceRecord extends Model
 {
     use HasFactory;
@@ -12,6 +24,7 @@ class DeviceRecord extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'uuid',
         'datetime_last_active',
         'active_session_id',
         'device_name',
@@ -19,6 +32,8 @@ class DeviceRecord extends Model
         'identifier',
         'product',
     ];
+
+    public $timestamps = false;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

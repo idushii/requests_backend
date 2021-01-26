@@ -15,8 +15,9 @@ class CreateDeviceRecordsTable extends Migration
     {
         Schema::create('device_records', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
             $table->date('datetime_last_active');
-            $table->integer('active_session_id');
+            $table->integer('active_session_id')->nullable();
             $table->string('device_name');
             $table->string('device_version');
             $table->string('identifier');

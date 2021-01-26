@@ -3,10 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeviceRecord;
+use App\Models\SessionRecord;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class DeviceRecordController extends Controller
 {
+    public function index(Request $request)
+    {
+        $input = $request->all();
+        error_log(json_encode($input));
+
+        $device = DeviceRecord::firstWhere('uuid', $input['uuid']);
+        if (!$device) {
+            $device = new DeviceRecord($input);
+            $device->device_name = $input['deviceName'];
+            $device->device_version = $input['deviceVersion'];
+        }
+        $device->datetime_last_active = now();
+        $device->save();
+
+        $session = new SessionRecord();
+        $session->device_id = $device->id;
+
+        $session->save();
+
+        $device->active_session_id = $session->id;
+        $device->save();
+
+        return ['session_id' => $session->id];
+    }
+
     /**
      * getDevice
      *
@@ -23,7 +50,7 @@ class DeviceRecordController extends Controller
         return $device;
     }
 
-     /**
+    /**
      * Operation getAllRevices
      *
      * @param id

@@ -10,6 +10,42 @@ use Illuminate\Support\Facades\DB;
 
 class RecordRequestController extends Controller
 {
+    function index(Request $request)
+    {
+        try {
+            $input = $request->all();
+            error_log('Request:');
+            error_log(json_encode($input));
+            $req = RecordRequest::where('number', $input['number'])->where('session_id', $input['sessionId'])->first();
+
+//            error_log('found req');
+//            error_log(json_encode($req));
+
+            if (!(array)$req) {
+//                error_log('create req');
+                $req = new RecordRequest($input);
+            }
+
+            $req->status = $input['status'];
+            $req->status_code = $input['code'];
+            $req->session_id = $input['sessionId'];
+            $req->headers = json_encode($input['headers']);
+            $req->headers_response = json_encode($input['headersResponse']);
+            $req->params = json_encode($input['params']);
+            $req->payload = json_encode($input['payload']);
+            $req->created_at = $input['createdAt'];
+            $req->response_at = $input['responseAt'];
+
+            error_log(json_encode($req));
+            $req->save();
+            return $req->toJson();
+        } catch (\Exception $e) {
+            error_log(json_encode($e));
+            return $e;
+            return 'error';
+        }
+    }
+
     /**
      * Operation getLastRequests
      *
@@ -49,7 +85,7 @@ class RecordRequestController extends Controller
         return $recordrequests;
     }
 
-     /**
+    /**
      * Operation addRequest
      *
      * @return Http response
