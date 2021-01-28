@@ -12,6 +12,7 @@ echo "Deploying application ..."
         php artisan optimize &&
         php artisan up &&
         sudo service apache2 restart &&
+        chmod +x run_ws.sh && pm2 restart run_ws.sh &&
         echo "Application deployed!" &&
         ../done.sh 2
 )
